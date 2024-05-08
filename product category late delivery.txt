@@ -1,0 +1,8 @@
+SELECT pd.Category_Name,
+       COUNT(*) AS Late_Deliveries
+FROM ShippingData sd
+JOIN MainTable mt ON sd.Order_Id = mt.Order_Id
+JOIN ProductData pd ON mt.Product_Category_Id = pd.Product_Category_Id
+WHERE sd.Delivery_Status = 'late delivery'
+GROUP BY pd.Category_Name
+ORDER BY Late_Deliveries DESC
