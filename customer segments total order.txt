@@ -1,0 +1,8 @@
+SELECT
+    Customer_Segment,
+    COUNT(DISTINCT Order_Id) AS Total_Orders,
+    SUM(CAST(Order_Item_Total AS DECIMAL(18, 2))) AS Total_Sales,
+    AVG(CAST(Order_Item_Total AS DECIMAL(18, 2))) AS Avg_Order_Value
+FROM CustomerData
+INNER JOIN OrderData ON CustomerData.Customer_Id = OrderData.Order_Customer_Id
+GROUP BY Customer_Segment;
