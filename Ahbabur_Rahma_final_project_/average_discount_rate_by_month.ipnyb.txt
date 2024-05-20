@@ -1,0 +1,24 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+df = pd.read_csv('profits sales to discount rate.csv')
+
+months = df['Order_Month']
+avg_discount_rate = df['Avg_Discount_Rate']
+
+plt.figure(figsize=(10, 6))
+plt.plot(months, avg_discount_rate, marker='o', linestyle='-', color='green', label='Avg Discount Rate')
+plt.xlabel('Month')
+plt.ylabel('Average Discount Rate')
+plt.title('Average Discount Rate by Month')
+plt.xticks(months)
+plt.legend()
+
+coefficients = np.polyfit(months, avg_discount_rate, 1)
+trend_line = np.polyval(coefficients, months)
+
+plt.plot(months, trend_line, linestyle='--', color='blue', label='Trend Line')
+
+plt.grid(True)
+plt.show()
